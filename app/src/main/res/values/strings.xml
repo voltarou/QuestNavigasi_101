@@ -5,4 +5,5 @@
     <string name="jenis_kelamin">jenis_kelamin</string>
     <string name="alamat">alamat</string>
     <string name="tampilan_data">tampilan_data</string>
+    <string name="submit">submit</string>
 </resources>
