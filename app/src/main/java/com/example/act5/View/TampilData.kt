@@ -1,8 +1,8 @@
 package com.example.act5.View
 
-import IsiRuang
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
@@ -44,19 +44,29 @@ fun TampilData() {
             )
         }
     ) { paddingValues ->
-        IsiRuang(paddingValues) {
-            Column(
-                modifier = Modifier.padding(dimensionResource(id = R.dimen.padding_medium)),
-                verticalArrangement = Arrangement.spacedBy(space = dimensionResource(id = R.dimen.padding_small))
-            ) {
-                items.forEach { item ->
-                    Column {
-                        Text(text = item.first.uppercase(), fontSize = 16.sp)
-                        Text(text = item.second, fontWeight = FontWeight.Bold, fontFamily = FontFamily.Cursive, fontSize = 22.sp)
-                    }
-                    HorizontalDivider(thickness = 1.dp, color = Color.Gray)
-                }
+        IsiRuang(paddingValues = paddingValues, items = items)
+    }
+}
+
+@Composable
+fun IsiRuang(paddingValues: PaddingValues, items: List<Pair<String, String>>) {
+    Column(
+        modifier = Modifier
+            .padding(paddingValues = paddingValues)
+            .padding(dimensionResource(id = R.dimen.padding_medium)),
+        verticalArrangement = Arrangement.spacedBy(space = dimensionResource(id = R.dimen.padding_small))
+    ) {
+        items.forEach { item ->
+            Column {
+                Text(text = item.first.uppercase(), fontSize = 16.sp)
+                Text(
+                    text = item.second,
+                    fontWeight = FontWeight.Bold,
+                    fontFamily = FontFamily.Cursive,
+                    fontSize = 22.sp
+                )
             }
+            HorizontalDivider(thickness = 1.dp, color = Color.Gray)
         }
     }
 }
