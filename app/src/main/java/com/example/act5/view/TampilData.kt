@@ -1,9 +1,13 @@
-package com.example.act5.View
+package com.example.act5.view
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Scaffold
@@ -13,7 +17,6 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
@@ -25,10 +28,7 @@ import com.example.act4.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TampilData() {
-    val context = LocalContext.current
-    val onBackStack: () -> Unit = { }
-
+fun TampilData(onBackBtnClick: () -> Unit) {
     val items = listOf(
         Pair(first = stringResource(id = R.string.nama_lengkap), second = "Bening Namira"),
         Pair(first = stringResource(id = R.string.jenis_kelamin), second = "Laki-laki"),
@@ -36,7 +36,6 @@ fun TampilData() {
     )
 
     Scaffold(
-        modifier = Modifier,
         topBar = {
             TopAppBar(
                 title = { Text(text = stringResource(id = R.string.tampilan_data), color = Color.White) },
@@ -44,17 +43,17 @@ fun TampilData() {
             )
         }
     ) { paddingValues ->
-        IsiRuang(paddingValues = paddingValues, items = items)
+        IsiRuang(paddingValues = paddingValues, items = items, onBackBtnClick = onBackBtnClick)
     }
 }
 
 @Composable
-fun IsiRuang(paddingValues: PaddingValues, items: List<Pair<String, String>>) {
+fun IsiRuang(paddingValues: PaddingValues, items: List<Pair<String, String>>, onBackBtnClick: () -> Unit) {
     Column(
         modifier = Modifier
-            .padding(paddingValues = paddingValues)
+            .padding(paddingValues)
             .padding(dimensionResource(id = R.dimen.padding_medium)),
-        verticalArrangement = Arrangement.spacedBy(space = dimensionResource(id = R.dimen.padding_small))
+        verticalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.padding_small))
     ) {
         items.forEach { item ->
             Column {
@@ -67,6 +66,13 @@ fun IsiRuang(paddingValues: PaddingValues, items: List<Pair<String, String>>) {
                 )
             }
             HorizontalDivider(thickness = 1.dp, color = Color.Gray)
+        }
+        Spacer(modifier = Modifier.height(10.dp))
+        Button(
+            modifier = Modifier.fillMaxWidth(),
+            onClick = onBackBtnClick
+        ) {
+            Text(text = "Back")
         }
     }
 }

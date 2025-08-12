@@ -1,3 +1,5 @@
+package com.example.act5.view
+
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -31,14 +33,14 @@ import com.example.act4.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun FormIsian() {
+fun FormIsian(onSubmitBtnClick: () -> Unit) {
     val jenisK = listOf("Laki-laki", "Perempuan")
     var selected by remember { mutableStateOf("") }
 
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text(text = stringResource(id = R.string.name), color = Color.White) },
+                title = { Text(text = stringResource(id = R.string.nama_lengkap), color = Color.White) },
                 colors = TopAppBarDefaults.mediumTopAppBarColors(containerColor = colorResource(id = R.color.teal_700))
             )
         }
@@ -111,7 +113,7 @@ fun IsiRuang(
         Spacer(modifier = Modifier.height(30.dp))
 
         Button(
-            onClick = { /* onSubmitBtnClick */ },
+            onClick = {  },
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(horizontal = 25.dp)
