@@ -1,4 +1,4 @@
-package com.example.act5.view
+package com.example.act4.view
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -8,10 +8,8 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Scaffold
@@ -19,9 +17,9 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -35,65 +33,74 @@ import com.example.act4.R
 @Composable
 fun FormIsian(onSubmitBtnClick: () -> Unit) {
     val jenisK = listOf("Laki-laki", "Perempuan")
-    var selected by remember { mutableStateOf("") }
+    var namaLengkap by remember { mutableStateOf("") }
+    var alamat by remember { mutableStateOf("") }
+    var jenisKelamin by remember { mutableStateOf("") }
 
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text(text = stringResource(id = R.string.nama_lengkap), color = Color.White) },
+                title = { Text(text = stringResource(id = R.string.tampilan_data), color = Color.White) },
                 colors = TopAppBarDefaults.mediumTopAppBarColors(containerColor = colorResource(id = R.color.teal_700))
             )
         }
     ) { paddingValues ->
-        IsiRuang(paddingValues, jenisK, selected) { newSelected ->
-            selected = newSelected
-        }
+        IsiRuang(
+            paddingValues = paddingValues,
+            namaLengkap = namaLengkap,
+            onNamaLengkapChange = { namaLengkap = it },
+            alamat = alamat,
+            onAlamatChange = { alamat = it },
+            jenisK = jenisK,
+            jenisKelamin = jenisKelamin,
+            onJenisKelaminSelected = { jenisKelamin = it },
+            onSubmitBtnClick = onSubmitBtnClick
+        )
     }
 }
 
 @Composable
 fun IsiRuang(
     paddingValues: PaddingValues,
+    namaLengkap: String,
+    onNamaLengkapChange: (String) -> Unit,
+    alamat: String,
+    onAlamatChange: (String) -> Unit,
     jenisK: List<String>,
-    selected: String,
-    onItemSelected: (String) -> Unit
+    jenisKelamin: String,
+    onJenisKelaminSelected: (String) -> Unit,
+    onSubmitBtnClick: () -> Unit
 ) {
     Column(
         modifier = Modifier
             .padding(paddingValues)
-            .fillMaxWidth(),
+            .fillMaxWidth()
+            .padding(20.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Top
+        verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
         OutlinedTextField(
-            value = "",
-            onValueChange = { },
+            value = namaLengkap,
+            onValueChange = onNamaLengkapChange,
             singleLine = true,
-            modifier = Modifier
-                .padding(top = 20.dp)
-                .width(250.dp),
+            modifier = Modifier.fillMaxWidth(),
             label = { Text(text = "Nama Lengkap") }
         )
 
-        HorizontalDivider(
-            modifier = Modifier
-                .padding(20.dp)
-                .width(250.dp),
-            thickness = 1.dp,
-            color = Color.Red
-        )
-
         Row(
-            modifier = Modifier
-                .padding(top = 10.dp)
-                .width(250.dp),
-            horizontalArrangement = Arrangement.SpaceAround
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.spacedBy(16.dp),
+            verticalAlignment = Alignment.CenterVertically
         ) {
+            Text("Jenis Kelamin:", modifier = Modifier.weight(1f))
             jenisK.forEach { item ->
-                Row(verticalAlignment = Alignment.CenterVertically) {
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    modifier = Modifier.weight(1f)
+                ) {
                     RadioButton(
-                        selected = selected == item,
-                        onClick = { onItemSelected(item) }
+                        selected = jenisKelamin == item,
+                        onClick = { onJenisKelaminSelected(item) }
                     )
                     Text(text = item)
                 }
@@ -101,22 +108,18 @@ fun IsiRuang(
         }
 
         OutlinedTextField(
-            value = "",
-            onValueChange = { },
+            value = alamat,
+            onValueChange = onAlamatChange,
             singleLine = true,
-            modifier = Modifier
-                .padding(top = 20.dp)
-                .width(250.dp),
+            modifier = Modifier.fillMaxWidth(),
             label = { Text(text = "Alamat") }
         )
 
-        Spacer(modifier = Modifier.height(30.dp))
+        Spacer(modifier = Modifier.height(20.dp))
 
         Button(
-            onClick = {  },
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 25.dp)
+            onClick = onSubmitBtnClick,
+            modifier = Modifier.fillMaxWidth()
         ) {
             Text(text = stringResource(id = R.string.submit))
         }

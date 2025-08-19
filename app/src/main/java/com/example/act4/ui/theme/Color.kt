@@ -1,4 +1,4 @@
-package com.example.act5.ui.theme
+package com.example.act4.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

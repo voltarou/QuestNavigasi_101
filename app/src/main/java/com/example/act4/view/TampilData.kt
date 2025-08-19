@@ -1,4 +1,4 @@
-package com.example.act5.view
+package com.example.act4.view
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column

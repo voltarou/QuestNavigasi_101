@@ -1,16 +1,12 @@
-package com.example.act5
+package com.example.act4
 
 import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Surface
-import androidx.compose.ui.Modifier
-import com.example.act5.ui.theme.Act5Theme
+import com.example.act4.ui.theme.Act5Theme
 
 class MainActivity : ComponentActivity() {
     @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")

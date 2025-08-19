@@ -1,4 +1,4 @@
-package com.example.act5
+package com.example.act4
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
@@ -8,8 +8,8 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.act5.view.TampilData
-import com.example.act5.view.FormIsian
+import com.example.act4.view.TampilData
+import com.example.act4.view.FormIsian
 
 enum class Navigasi {
     Formulir,
